@@ -16,7 +16,7 @@ public class User {
     private String userId;
     private String profileName;
     private String profilePassword;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Set<Role> userRoles;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Review> userReviews;
