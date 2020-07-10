@@ -10,7 +10,8 @@ import java.util.List;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
-    @Query(value = "select r.productId, count (r.productId) as num_of_rev from Review r group by r.productId order by num_of_rev desc ")
+    @Query(value = "select r.productId, count (r.productId) as num_of_rev from Review r "
+            + "group by r.productId order by num_of_rev desc ")
     List<Object> findMostCommentedProducts();
 }
 
