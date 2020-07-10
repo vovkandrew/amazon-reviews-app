@@ -37,8 +37,7 @@ public class ReviewService {
     }
 
     private void iterateOverReview(String string, HashMap<String, Integer> hashMap) {
-        String[] split =
-                string.toLowerCase()
+        String[] split = string.toLowerCase()
                         .replaceAll("[^a-zA-Z0-9\\s]", "")
                         .split(" ");
         for (String s: split) {
