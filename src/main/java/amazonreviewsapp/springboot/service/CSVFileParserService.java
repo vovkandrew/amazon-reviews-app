@@ -27,6 +27,7 @@ public class CSVFileParserService {
     private static final int SUMMARY = 8;
     private static final int TEXT = 9;
     private static final String USER_ROLE = "USER";
+    private static final int COUNTER = 1000;
 
     @Autowired
     private UserService userService;
@@ -43,7 +44,8 @@ public class CSVFileParserService {
             reader = new CSVReader(new FileReader(filePath));
             reader.readNext();
             String[] line;
-            while ((line = reader.readNext()) != null) {
+            int count = COUNTER;
+            while ((line = reader.readNext()) != null && (count > 0)) {
                 if (userService.existsById(line[USER_ID])) {
                     User userToUpdate = userService.findById(line[USER_ID]).get();
                     userService.delete(userToUpdate);
@@ -55,6 +57,7 @@ public class CSVFileParserService {
                     userToUpdate.setUserReviews(userReviews);
                     userService.save(userToUpdate);
                     System.out.println(userToUpdate.getUserId() + " has been updated in the db");
+                    count--;
                 } else {
                     User newUser = getUserFromReader(line);
                     Review userReview = getReviewFromReader(line);
@@ -64,6 +67,7 @@ public class CSVFileParserService {
                     newUser.setUserReviews(userReviews);
                     userService.save(newUser);
                     System.out.println(newUser.getUserId() + " has been added to the db");
+                    count--;
                 }
             }
         } catch (CsvValidationException | IOException e) {
