@@ -1,5 +1,8 @@
 package amazonreviewsapp.springboot.controller;
 
+import amazonreviewsapp.springboot.dto.MostCommentedReviewDto;
+import amazonreviewsapp.springboot.mapper.ReviewMapper;
+import amazonreviewsapp.springboot.model.Review;
 import amazonreviewsapp.springboot.service.ReviewService;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,9 +18,13 @@ public class ProductController {
     @Autowired
     private ReviewService reviewService;
 
+    @Autowired
+    private ReviewMapper mapper;
+
     @GetMapping("/most-commented")
-    public List<Object> mostCommentedProducts(@RequestParam String limit) {
+    public List<MostCommentedReviewDto> mostCommentedProducts(@RequestParam String limit) {
         return reviewService.findMostCommentedProducts().stream()
+                .map(el -> mapper.getMostCommentedReviewDtoFromObjectArr(el))
                 .limit(Long.parseLong(limit))
                 .collect(Collectors.toList());
     }

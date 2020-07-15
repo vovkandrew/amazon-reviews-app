@@ -1,14 +1,8 @@
-package amazonreviewsapp.springboot.model;
+package amazonreviewsapp.springboot.dto;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "reviews")
-public class Review {
-    @Id
+public class ReviewResponseDto {
     private Long reviewId;
     private String productId;
     private Long helpNum;
@@ -16,14 +10,13 @@ public class Review {
     private Long score;
     private String time;
     private String reviewSummary;
-    @Column(length = 30000) //max length 65000+ but for the whole raw columns
     private String text;
 
-    public Review() {
+    public ReviewResponseDto() {
     }
 
-    public Review(Long reviewId, String productId, Long helpNum, Long helpDenum,
-                  Long score, String time, String reviewSummary, String text) {
+    public ReviewResponseDto(Long reviewId, String productId, Long helpNum, Long helpDenum, Long score,
+                             String time, String reviewSummary, String text) {
         this.reviewId = reviewId;
         this.productId = productId;
         this.helpNum = helpNum;

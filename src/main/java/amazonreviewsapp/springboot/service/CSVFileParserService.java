@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -27,7 +28,7 @@ public class CSVFileParserService {
     private static final int SUMMARY = 8;
     private static final int TEXT = 9;
     private static final String USER_ROLE = "USER";
-    private static final int COUNTER = 1000;
+    private static final int COUNTER = 50;
 
     @Autowired
     private UserService userService;
@@ -37,6 +38,9 @@ public class CSVFileParserService {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private PasswordEncoder encoder;
 
     public void parseCsvFile(String filePath) {
         CSVReader reader = null;
@@ -79,7 +83,7 @@ public class CSVFileParserService {
         User user = new User();
         user.setUserId(line[USER_ID]);
         user.setProfileName(line[PROFILE_NAME]);
-        user.setProfilePassword(line[PROFILE_NAME]);
+        user.setProfilePassword(encoder.encode(line[PROFILE_NAME]));
         user.setUserRoles(Set.of(roleService.findByRoleName(Role.RoleName.valueOf(USER_ROLE))));
         return user;
     }

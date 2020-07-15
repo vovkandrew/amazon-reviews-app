@@ -28,7 +28,15 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public List<Object> findMostActiveUsers() {
+    public List<Object[]> findMostActiveUsers() {
         return userRepository.findMostActiveUsers();
+    }
+
+    public Optional<User> findUserByProfileName(String profileName) {
+        return userRepository.findUserByProfileName(profileName);
+    }
+
+    public String findUserByReviewId(Long reviewId) {
+        return userRepository.getUserIdByReviewId(reviewId);
     }
 }

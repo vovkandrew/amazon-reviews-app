@@ -11,19 +11,6 @@ import javax.annotation.PostConstruct;
 
 @RestController
 public class IndexController {
-    @Autowired
-    private RoleService roleService;
-
-    @PostConstruct
-    private void addRoles() {
-        Role user = new Role();
-        user.setRoleName(Role.RoleName.USER);
-        roleService.save(user);
-        Role admin = new Role();
-        admin.setRoleName(Role.RoleName.ADMIN);
-        roleService.save(admin);
-
-    }
 
     @GetMapping
     @RequestMapping("/")

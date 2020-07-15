@@ -1,12 +1,15 @@
 package amazonreviewsapp.springboot.service;
 
+import amazonreviewsapp.springboot.dto.MostCommentedReviewDto;
 import amazonreviewsapp.springboot.model.Review;
+import amazonreviewsapp.springboot.model.User;
 import amazonreviewsapp.springboot.repository.ReviewRepository;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +23,7 @@ public class ReviewService {
         reviewRepository.save(review);
     }
 
-    public List<Object> findMostCommentedProducts() {
+    public List<Object[]> findMostCommentedProducts() {
         return reviewRepository.findMostCommentedProducts();
     };
 
@@ -61,5 +64,13 @@ public class ReviewService {
             }
         });
         return sorted;
+    }
+
+    public void deleteReviewById(String id) {
+        reviewRepository.deleteById(Long.parseLong(id));
+    }
+
+    public Optional<Review> findReviewById(String id) {
+        return reviewRepository.findById(Long.parseLong(id));
     }
 }
