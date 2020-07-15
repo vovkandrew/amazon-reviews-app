@@ -2,7 +2,7 @@ language: java
 jdk:
   - openjdk11
 before_install:
-  - chmod +x mvnw
+  - chmod +x mvnw.cmd
 script:
   - mvn clean install
 cache:
