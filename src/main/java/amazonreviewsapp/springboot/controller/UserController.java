@@ -1,23 +1,20 @@
 package amazonreviewsapp.springboot.controller;
 
 import amazonreviewsapp.springboot.dto.MostActiveUserDto;
-import amazonreviewsapp.springboot.dto.ReviewRequestDto;
 import amazonreviewsapp.springboot.dto.ReviewResponseDto;
 import amazonreviewsapp.springboot.jwt.JwtTokenProvider;
 import amazonreviewsapp.springboot.mapper.ReviewMapper;
 import amazonreviewsapp.springboot.mapper.UserMapper;
 import amazonreviewsapp.springboot.model.User;
-import amazonreviewsapp.springboot.service.ReviewService;
 import amazonreviewsapp.springboot.service.UserService;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/users")

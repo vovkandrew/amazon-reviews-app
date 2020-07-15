@@ -1,7 +1,5 @@
 package amazonreviewsapp.springboot.dto;
 
-import javax.persistence.Column;
-
 public class ReviewResponseDto {
     private Long reviewId;
     private String productId;

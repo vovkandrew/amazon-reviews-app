@@ -4,20 +4,14 @@ import amazonreviewsapp.springboot.dto.MostCommentedReviewDto;
 import amazonreviewsapp.springboot.dto.ReviewRequestDto;
 import amazonreviewsapp.springboot.dto.ReviewResponseDto;
 import amazonreviewsapp.springboot.model.Review;
-import amazonreviewsapp.springboot.service.ReviewService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.util.Date;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ReviewMapper {
     private static final Long DEFAULT_HELP_VALUE = 0L;
     private static final Long DEFAULT_SCORE = 0L;
     private static final int TIMESTAMP_MULTIPLIER = 1000;
-
-    @Autowired
-    private ReviewService reviewService;
 
     public Review getReviewFromReviewRequestDto(ReviewRequestDto reviewRequestDto) {
         Review review = new Review();

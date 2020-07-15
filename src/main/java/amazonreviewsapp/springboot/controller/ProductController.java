@@ -2,7 +2,6 @@ package amazonreviewsapp.springboot.controller;
 
 import amazonreviewsapp.springboot.dto.MostCommentedReviewDto;
 import amazonreviewsapp.springboot.mapper.ReviewMapper;
-import amazonreviewsapp.springboot.model.Review;
 import amazonreviewsapp.springboot.service.ReviewService;
 import java.util.List;
 import java.util.stream.Collectors;
