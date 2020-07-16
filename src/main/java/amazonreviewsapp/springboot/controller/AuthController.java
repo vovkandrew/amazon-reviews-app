@@ -1,7 +1,7 @@
 package amazonreviewsapp.springboot.controller;
 
 import amazonreviewsapp.springboot.dto.AuthRequestDto;
-import amazonreviewsapp.springboot.jwt.JwtTokenProvider;
+//import amazonreviewsapp.springboot.jwt.JwtTokenProvider;
 import amazonreviewsapp.springboot.model.Role;
 import amazonreviewsapp.springboot.model.User;
 import amazonreviewsapp.springboot.service.RoleService;
@@ -31,8 +31,8 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private JwtTokenProvider provider;
+    /*@Autowired
+    private JwtTokenProvider provider;*/
 
     @Autowired
     private RoleService roleService;
@@ -65,7 +65,7 @@ public class AuthController {
         if(user.isEmpty()) {
             throw new UsernameNotFoundException("No user with current name");
         }
-        String token = provider.createToken(authRequestDto.getUsername(), user.get().getUserRoles());
+        String token = "token"; //provider.createToken(authRequestDto.getUsername(), user.get().getUserRoles());
         Map<String, String> response = new HashMap<>();
         response.put("username", authRequestDto.getUsername());
         response.put("token", token);

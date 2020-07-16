@@ -1,7 +1,7 @@
 package amazonreviewsapp.springboot.config;
 
-import amazonreviewsapp.springboot.jwt.JwtConfigurer;
-import amazonreviewsapp.springboot.jwt.JwtTokenProvider;
+/*import amazonreviewsapp.springboot.jwt.JwtConfigurer;
+import amazonreviewsapp.springboot.jwt.JwtTokenProvider;*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,8 +18,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private JwtTokenProvider provider;
+    /*@Autowired
+    private JwtTokenProvider provider;*/
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -50,9 +50,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/auth").permitAll()
                 .antMatchers("/reviews/add-review", "/reviews/edit-review").hasRole("USER")
                 .antMatchers("/reviews/delete/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
-                .and()
-                .apply(new JwtConfigurer(provider));
+                .anyRequest().authenticated();
+                /*.and()
+                .apply(null new JwtConfigurer(provider));*/
 
     }
 
