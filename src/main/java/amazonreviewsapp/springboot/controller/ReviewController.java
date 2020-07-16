@@ -3,7 +3,7 @@ package amazonreviewsapp.springboot.controller;
 import amazonreviewsapp.springboot.dto.EditReviewRequestDto;
 import amazonreviewsapp.springboot.dto.ReviewRequestDto;
 import amazonreviewsapp.springboot.dto.ReviewResponseDto;
-import amazonreviewsapp.springboot.jwt.JwtTokenProvider;
+//import amazonreviewsapp.springboot.jwt.JwtTokenProvider;
 import amazonreviewsapp.springboot.mapper.ReviewMapper;
 import amazonreviewsapp.springboot.model.Review;
 import amazonreviewsapp.springboot.model.User;
@@ -38,8 +38,8 @@ public class ReviewController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private JwtTokenProvider provider;
+   /* @Autowired
+    private JwtTokenProvider provider;*/
 
     @GetMapping
     @RequestMapping("/most-used-words")
@@ -109,7 +109,8 @@ public class ReviewController {
     }
 
     private User getUserFromRequest(HttpServletRequest request) {
-        String token = provider.resolveToken(request);
-        return userService.findUserByProfileName(provider.getUserNameByToken(token)).get();
+        /*String token = provider.resolveToken(request);
+        return userService.findUserByProfileName(provider.getUserNameByToken(token)).get();*/
+        return new User();
     }
 }

@@ -39,8 +39,18 @@ public class CSVFileParserService {
     @Autowired
     private RoleService roleService;
 
-    @Autowired
-    private PasswordEncoder encoder;
+    //@Autowired
+    private PasswordEncoder encoder = new PasswordEncoder() {
+        @Override
+        public String encode(CharSequence rawPassword) {
+            return null;
+        }
+
+        @Override
+        public boolean matches(CharSequence rawPassword, String encodedPassword) {
+            return false;
+        }
+    };
 
     public void parseCsvFile(String filePath) {
         CSVReader reader = null;
