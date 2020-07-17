@@ -1,6 +1,8 @@
 package amazonreviewsapp.springboot.service;
 
 import amazonreviewsapp.springboot.dto.MostCommentedReviewDto;
+import amazonreviewsapp.springboot.dto.MostUsedWordResponseDto;
+import amazonreviewsapp.springboot.mapper.ReviewMapper;
 import amazonreviewsapp.springboot.model.Review;
 import amazonreviewsapp.springboot.model.User;
 import amazonreviewsapp.springboot.repository.ReviewRepository;
@@ -19,6 +21,9 @@ public class ReviewService {
     @Autowired
     private ReviewRepository reviewRepository;
 
+    @Autowired
+    private ReviewMapper mapper;
+
     public void save(Review review) {
         reviewRepository.save(review);
     }
@@ -27,7 +32,7 @@ public class ReviewService {
         return reviewRepository.findMostCommentedProducts();
     };
 
-    public Object[] findMostUsedWordsFromReviews() {
+    public List<MostUsedWordResponseDto> findMostUsedWordsFromReviews() {
         List<String> texts =
                 reviewRepository.findAll().stream()
                         .map(Review::getText)
@@ -55,15 +60,14 @@ public class ReviewService {
         }
     }
 
-    private Object[] sortHashMap(HashMap<String, Integer> hashMap) {
-        Object[] sorted = hashMap.entrySet().toArray();
-        Arrays.sort(sorted, new Comparator() {
-            public int compare(Object o1, Object o2) {
-                return ((Map.Entry<String, Integer>) o2).getValue()
-                        .compareTo(((Map.Entry<String, Integer>) o1).getValue());
-            }
-        });
-        return sorted;
+    private List<MostUsedWordResponseDto> sortHashMap(HashMap<String, Integer> hashMap) {
+        List<MostUsedWordResponseDto> sorted = hashMap.entrySet().stream()
+                .map(e -> mapper.getMostUsedWordDtoFromObjectArr(e))
+                .collect(Collectors.toList());
+        return (List<MostUsedWordResponseDto>) sorted.stream()
+                .sorted((Comparator) (o1, o2) -> ((Map.Entry<String, Integer>) o2).getValue()
+                .compareTo(((Map.Entry<String, Integer>) o1).getValue()))
+                .collect(Collectors.toList());
     }
 
     public void deleteReviewById(String id) {

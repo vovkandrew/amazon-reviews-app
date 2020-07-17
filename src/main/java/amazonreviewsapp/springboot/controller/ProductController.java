@@ -21,7 +21,7 @@ public class ProductController {
     private ReviewMapper mapper;
 
     @GetMapping("/most-commented")
-    public List<MostCommentedReviewDto> mostCommentedProducts(@RequestParam String limit) {
+    public List<MostCommentedReviewDto> mostCommentedProducts(@RequestParam(defaultValue = "1000") String limit) {
         return reviewService.findMostCommentedProducts().stream()
                 .map(el -> mapper.getMostCommentedReviewDtoFromObjectArr(el))
                 .limit(Long.parseLong(limit))

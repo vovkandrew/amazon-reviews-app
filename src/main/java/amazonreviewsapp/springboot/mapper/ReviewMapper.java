@@ -1,10 +1,14 @@
 package amazonreviewsapp.springboot.mapper;
 
+import amazonreviewsapp.springboot.dto.EditReviewRequestDto;
 import amazonreviewsapp.springboot.dto.MostCommentedReviewDto;
+import amazonreviewsapp.springboot.dto.MostUsedWordResponseDto;
 import amazonreviewsapp.springboot.dto.ReviewRequestDto;
 import amazonreviewsapp.springboot.dto.ReviewResponseDto;
 import amazonreviewsapp.springboot.model.Review;
 import java.util.Date;
+import java.util.Map;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -41,5 +45,14 @@ public class ReviewMapper {
 
     public MostCommentedReviewDto getMostCommentedReviewDtoFromObjectArr(Object[] arr) {
         return new MostCommentedReviewDto((String) arr[0], (Long) arr[1]);
+    }
+
+    public MostUsedWordResponseDto getMostUsedWordDtoFromObjectArr(Map.Entry<String, Integer> entry) {
+        return new MostUsedWordResponseDto((String) entry.getKey(), (Integer) entry.getValue());
+    }
+
+    public void editReviewFromEditReviewRequestDto(EditReviewRequestDto reviewRequestDto, Review review) {
+        review.setReviewSummary(reviewRequestDto.getReviewSummary());
+        review.setText(reviewRequestDto.getText());
     }
 }
