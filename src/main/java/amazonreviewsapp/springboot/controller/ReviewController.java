@@ -10,7 +10,6 @@ import amazonreviewsapp.springboot.model.User;
 import amazonreviewsapp.springboot.service.ReviewService;
 import amazonreviewsapp.springboot.service.UserService;
 import java.security.InvalidKeyException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -63,7 +62,7 @@ public class ReviewController {
     }
 
     @PutMapping
-    @RequestMapping("/edit-review")
+    @RequestMapping("/current-review/")
     public ReviewResponseDto editReview(@RequestBody EditReviewRequestDto reviewRequestDto,
                                         HttpServletRequest request) throws InvalidKeyException {
         User user = getUserFromRequest(request);

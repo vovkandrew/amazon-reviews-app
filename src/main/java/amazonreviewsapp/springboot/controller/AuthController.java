@@ -7,12 +7,10 @@ import amazonreviewsapp.springboot.service.RoleService;
 import amazonreviewsapp.springboot.service.UserService;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,18 +27,6 @@ public class AuthController {
     @Autowired
     private RoleService roleService;
 
-    private PasswordEncoder passwordEncoder = new PasswordEncoder() {
-        @Override
-        public String encode(CharSequence rawPassword) {
-            return null;
-        }
-
-        @Override
-        public boolean matches(CharSequence rawPassword, String encodedPassword) {
-            return false;
-        }
-    };
-
     @PostConstruct
     private void addRoles() {
         Role user = new Role();
@@ -51,7 +37,7 @@ public class AuthController {
         roleService.save(admin);
         User newUser = new User();
         newUser.setProfileName("superuser");
-        newUser.setProfilePassword(passwordEncoder.encode("password"));
+        newUser.setProfilePassword("password");
         newUser.setUserId("superuserid");
         newUser.setUserRoles(Set.of(user, admin));
         newUser.setUserReviews(Set.of());
