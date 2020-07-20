@@ -67,10 +67,6 @@ public class ReviewService {
                 .sorted((Comparator) (o1, o2) -> ((MostUsedWordResponseDto) o2).getOccurrences()
                         .compareTo(((MostUsedWordResponseDto) o1).getOccurrences()))
                 .collect(Collectors.toList());
-        /*return (List<MostUsedWordResponseDto>) sorted.stream()
-                .sorted((Comparator) (o1, o2) -> ((MostUsedWordResponseDto) o2).getOccurrences()
-                        .compareTo(((MostUsedWordResponseDto) o1).getOccurrences()))
-                .collect(Collectors.toList());*/
     }
 
     public void deleteReviewById(String id) {
