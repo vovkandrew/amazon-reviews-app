@@ -2,6 +2,7 @@ package amazonreviewsapp.springboot.controller;
 
 import amazonreviewsapp.springboot.dto.MostActiveUserDto;
 import amazonreviewsapp.springboot.dto.ReviewResponseDto;
+import amazonreviewsapp.springboot.jwt.JwtTokenProvider;
 import amazonreviewsapp.springboot.mapper.ReviewMapper;
 import amazonreviewsapp.springboot.mapper.UserMapper;
 import amazonreviewsapp.springboot.model.User;
@@ -24,13 +25,15 @@ public class UserController {
     @Autowired
     private ReviewMapper mapper;
 
+    @Autowired
+    private JwtTokenProvider provider;
 
     @Autowired
     private UserMapper userMapper;
 
     @GetMapping
     @RequestMapping("/most-active")
-    public List<MostActiveUserDto> mostActiveUsers(@RequestParam String limit) {
+    public List<MostActiveUserDto> mostActiveUsers(@RequestParam(defaultValue = "1000") String limit) {
         return userService.findMostActiveUsers().stream()
                 .map(el -> userMapper.getMostActiveUserDtoFromObject(el))
                 .limit(Long.parseLong(limit))
@@ -47,6 +50,7 @@ public class UserController {
     }
 
     private User getUserFromRequest(HttpServletRequest request) {
-        return new User();
+        String token = provider.resolveToken(request);
+        return userService.findUserByProfileName(provider.getUserNameByToken(token)).get();
     }
 }
