@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -61,12 +62,10 @@ public class ReviewService {
     }
 
     private List<MostUsedWordResponseDto> sortHashMap(HashMap<String, Integer> hashMap) {
-        List<MostUsedWordResponseDto> sorted = hashMap.entrySet().stream()
+        return (List<MostUsedWordResponseDto>) hashMap.entrySet().stream()
                 .map(e -> mapper.getMostUsedWordDtoFromObjectArr(e))
-                .collect(Collectors.toList());
-        return (List<MostUsedWordResponseDto>) sorted.stream()
-                .sorted((Comparator) (o1, o2) -> ((Map.Entry<String, Integer>) o2).getValue()
-                .compareTo(((Map.Entry<String, Integer>) o1).getValue()))
+                .sorted((Comparator) (o1, o2) -> ((MostUsedWordResponseDto) o2).getOccurrences()
+                        .compareTo(((MostUsedWordResponseDto) o1).getOccurrences()))
                 .collect(Collectors.toList());
     }
 
