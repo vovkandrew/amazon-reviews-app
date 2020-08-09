@@ -15,8 +15,7 @@ public class ParseController {
     @GetMapping
     @RequestMapping("/parse")
     public String startParsing() {
-        File file = new File(getClass().getClassLoader().getResource("Reviews.csv").getFile());
-        parser.parseCsvFile(file.getPath());
+        parser.parseCsvFile("/tmp/Reviews.csv");
         return "Parsing has been initialized";
     }
 }
