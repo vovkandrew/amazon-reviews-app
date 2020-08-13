@@ -7,27 +7,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
-
 @RestController
 public class ParseController {
     @Autowired
     private CSVFileParserService parser;
 
     @Value("${win.filepath}")
-    private String PATH_WIND;
+    private String pathWin;
 
     @Value("${lin.filepath}")
-    private String PATH_LIN;
+    private String pathLin;
 
     @GetMapping
     @RequestMapping("/parse")
     public String startParsing() {
         if (System.getProperty("os.name").startsWith("Windows")) {
-            parser.parseCsvFile(PATH_WIND);
+            parser.parseCsvFile(pathWin);
 
         } if (System.getProperty("os.name").startsWith("Linux")) {
-            parser.parseCsvFile(PATH_LIN);
+            parser.parseCsvFile(pathLin);
         }
         return "Parsing has been initialized";
     }
