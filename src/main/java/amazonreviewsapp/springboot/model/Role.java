@@ -1,7 +1,5 @@
 package amazonreviewsapp.springboot.model;
 
-import org.hibernate.annotations.Generated;
-
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
